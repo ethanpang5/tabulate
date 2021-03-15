@@ -1,0 +1,38 @@
+.widget {
+    border: 1px solid gray;
+}
+
+.widget-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+.widget-title {
+    font-size: 150%;
+}
+
+.widget-control {
+    /* align-self: flex-end; */
+    align-self: center;
+}
+
+.widget-control a {
+    color: black;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 100%;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.widget-control a:hover {
+    background: #ddd;
+    color: black;
+}
+
+.widget-grid {
+    display: grid;
+}
