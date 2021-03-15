@@ -1,0 +1,11 @@
+a:hover {
+    background-color: #F1C40F;
+    color: black;
+}
+a {
+    color: #F1C40F;
+}
+nav {
+    background-color: #0c0d47;
+    align-items: right;
+}
