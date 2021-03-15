@@ -1,8 +1,8 @@
-nav a:hover {
+nav a.nav-link:hover {
     background-color: #F1C40F;
     color: black;
 }
-a {
+a.nav-link {
     color: #F1C40F;
 }
 nav {
