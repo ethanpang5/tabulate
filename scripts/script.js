@@ -15,12 +15,12 @@ function openAllFavorites() {
 function addElement() {
     /** incomplete  */
     let div = document.createElement('div');
+    let a = document.createElement("a")
     const link = "https://www.nba.com/"
-    div.setAttribute("href", link)
+    a.setAttribute("href", link)
+    a.innerText = "NBA"
     div.setAttribute("class", "favorites-link")
-    
-
-
-    document.getElementById("favorites").addEventListener()
+    div.appendChild(a)
+    document.getElementById("favorites").appendChild(div)
 }
 
