@@ -1,5 +1,6 @@
 .widget {
     border: 1px solid gray;
+    border-radius: 1em;
     box-shadow: 3px 3px 3px grey;
 }
 
@@ -11,7 +12,7 @@
 }
 
 .widget-title {
-    padding-left: 10px;
+    padding-left: 1rem;
     font-size: 150%;
 }
 
