@@ -30,3 +30,12 @@ function addWebsite() {
     let url = document.getElementById("website-url").value
     addElement(name, url)
 }
+
+let userEmail = "charlesming2002%40gmail.com" //change later to get from user; keep in mind must change @ to %40
+const calendarFrame = document.createElement("iframe");
+calendarFrame.setAttribute("src", "https://www.google.com/calendar/embed?src=" + userEmail + "&ctz=America%2FLos_Angeles")
+calendarFrame.setAttribute("width", "100%")
+calendarFrame.setAttribute("height", "400")
+calendarFrame.setAttribute("frameborder", "0")
+calendarFrame.setAttribute("scrolling", "no")
+document.getElementById("calendar").appendChild(calendarFrame)
