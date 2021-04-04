@@ -12,7 +12,7 @@ function openAllFavorites() {
     }
 }
 
-function addElement(name, url) {
+function addElement(name, url, widgetName) {
     /** incomplete  */
     let div = document.createElement('div');
     let a = document.createElement("a")
@@ -20,13 +20,21 @@ function addElement(name, url) {
     a.setAttribute("href", url)
     a.setAttribute("target", "_blank")
     a.innerText = name
-    div.setAttribute("class", "favorites-link")
+    div.setAttribute("class", widgetName.concat("-link"))
     div.appendChild(a)
-    document.getElementById("favorites").appendChild(div)
+    document.getElementById(widgetName).appendChild(div)
 }
 
-function addWebsite() {
+
+function addFavorite() {
     let name = document.getElementById("website-name").value
     let url = document.getElementById("website-url").value
-    addElement(name, url)
+    addElement(name, url, "favorites")
 }
+
+function addClass() {
+    let name = document.getElementById("website-name").value
+    let url = document.getElementById("website-url").value
+    addElement(name, url, "classes")
+}
+
