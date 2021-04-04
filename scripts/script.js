@@ -12,17 +12,22 @@ function openAllFavorites() {
     }
 }
 
-function addElement(name, url, widgetName) {
+function addElement(name, url) {
     /** incomplete  */
     let div = document.createElement('div');
     let a = document.createElement("a")
+    let b = document.createElement("button")
+    b.setAttribute("class", "btn btn-dark delete-button")
+    b.setAttribute("type", "button");
+    b.setAttribute("onclick", "deleteElement(this)");
     // const link = "https://www.nba.com/"
     a.setAttribute("href", url)
     a.setAttribute("target", "_blank")
     a.innerText = name
-    div.setAttribute("class", widgetName.concat("-link"))
+    div.setAttribute("class", "favorites-link")
     div.appendChild(a)
-    document.getElementById(widgetName).appendChild(div)
+    div.appendChild(b)
+    document.getElementById("favorites").appendChild(div)
 }
 
 
@@ -40,3 +45,7 @@ calendarFrame.setAttribute("height", "400")
 calendarFrame.setAttribute("frameborder", "0")
 calendarFrame.setAttribute("scrolling", "no")
 document.getElementById("calendar").appendChild(calendarFrame)
+
+function deleteElement(e) {
+    e.parentElement.remove();
+}

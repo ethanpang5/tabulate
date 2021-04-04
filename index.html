@@ -70,10 +70,11 @@
         </div>
       </div>
       <div class="widget-grid" id="favorites">
-        <div><a class="favorites-link" href="https://www.netflix.com/">Netflix</a></div>
-        <div><a class="favorites-link" href="https://www.chess.com/">Chess</a></div>
-        <div><a class="favorites-link" href="https://playvalorant.com/">Valorant</a></div>
-        <div><a class="favorites-link" href="https://www.facebook.com/">Facebook</a></div>
+        <div style="position: relative;"><a class="favorites-link" href="https://www.netflix.com/">Netflix</a>
+          <button onclick="deleteElement(this)" type="button" class="btn btn-dark delete-button">delete</button></div>
+        <div><a class="favorites-link" href="https://www.chess.com/">Chess</a><button onclick="deleteElement(this)" type="button" class="btn btn-dark delete-button">delete</button></div>
+        <div><a class="favorites-link" href="https://playvalorant.com/">Valorant</a><button onclick="deleteElement(this)" type="button" class="btn btn-dark delete-button">delete</button></div>
+        <div><a class="favorites-link" href="https://www.facebook.com/">Facebook</a><button onclick="deleteElement(this)" type="button" class="btn btn-dark delete-button">delete</button></div>
       </div>
     </div>
     <div class="widget">
@@ -112,7 +113,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button onclick="addWebsite()" type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
+          <button onclick="addFavorite()" type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
         </div>
       </div>
     </div>

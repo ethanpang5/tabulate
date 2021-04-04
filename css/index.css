@@ -1,11 +1,19 @@
 nav a.nav-link:hover {
-    background-color: #F1C40F;
-    color: black;
+  background-color: #f1c40f;
+  color: black;
 }
 a.nav-link {
-    color: #F1C40F;
+  color: #f1c40f;
 }
 nav {
-    background-color: #0c0d47;
-    align-items: right;
+  background-color: #0c0d47;
+  align-items: right;
+}
+.delete-button {
+  display: flex;
+  float: right;
+  justify-content: center;
+  height: 70%;
+  text-align: center;
+  align-items: center;
 }
