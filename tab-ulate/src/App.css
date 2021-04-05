@@ -2,3 +2,65 @@
   text-align: center;
 }
 
+.widget {
+  border: 1px solid gray;
+  border-radius: 1em;
+  box-shadow: 3px 3px 3px grey;
+}
+
+.widget-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+
+.widget-title {
+  padding-left: 1rem;
+  font-size: 150%;
+}
+
+.widget-control {
+  align-self: center;
+}
+
+.widget-control a {
+  color: black;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 100%;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+.widget-control a:hover {
+  background: #ddd;
+  color: black;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.widget-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+}
+.widget-grid div {
+  background-color: aliceblue;
+  text-align: center;
+}
+.delete-button {
+  display: flex;
+  float: right;
+  justify-content: center;
+  height: 70%;
+  text-align: center;
+  align-items: center;
+}
