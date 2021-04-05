@@ -1,10 +1,13 @@
     /*global chrome*/
 import React, { useEffect, useState } from "react";
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './App.css';
-import { NavbarComponent } from "./components/navbarComponent";
+import { NavbarComponent } from "./components/NavbarComponent";
 
 function App() {
+  console.log('new');
   const [recents, setRecents] = useState([]);
   useEffect(() => {
     chrome.history.search({text: '', maxResults: 10}, function(data) {
@@ -28,15 +31,15 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <>
       <NavbarComponent/>
-        <button onClick={handleClick}>Test</button>
+      <button onClick={handleClick}>Test</button>
         <ul>
           {recents.map((link) => (
             <li>{link}</li>
           ))}
         </ul>
-    </div>
+    </>
   );
 }
 

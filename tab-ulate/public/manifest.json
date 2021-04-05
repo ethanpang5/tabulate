@@ -15,5 +15,5 @@
     "background",
     "history"
   ],
-  "content_security_policy": "script-src 'self' 'sha256-Iuol5uAzTzs3CCjjPPU7Z/SfqVpio0IQiiO+EnplRmQ='; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'sha256-v2JkpQseP9iZvFYFzmOMfUdSV5fp6Zx7FYC4FWXQsyI='; object-src 'self'"
 }
