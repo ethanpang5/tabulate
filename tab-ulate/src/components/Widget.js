@@ -2,7 +2,10 @@ import React from 'react';
 
 import WidgetLink from './WidgetLink';
 
-const Widget = ({title, links, openModal}) => {
+const Widget = ({title, links, openModal, removeLink}) => {
+    const removeLinkFromThisWidget = (url) => {
+        removeLink(title, url);
+    }
     return (
         <div className="widget">
             <div className="widget-header">
@@ -15,7 +18,7 @@ const Widget = ({title, links, openModal}) => {
             </div>
             <div className="widget-grid" id="classes">
                 {links.map((lnk) => (
-                    <WidgetLink link={lnk}/>
+                    <WidgetLink link={lnk} removeLink={removeLinkFromThisWidget}/>
                 ))}
             </div>
         </div>

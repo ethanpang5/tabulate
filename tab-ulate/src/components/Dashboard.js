@@ -15,7 +15,7 @@ function MyVerticallyCenteredModal(props) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(website, url, props.currWidget);
+        // console.log(website, url, props.currWidget);
         onHide();
         props.addLinkToWidget(website, url, props.currWidget)
     }
@@ -86,8 +86,21 @@ const Dashboard = () => {
             return obj.title === widgetName
         });
         toEdit.links.push({url: url, name: website});
-        const newState = widgets.map((obj) => obj)
+        const newState = widgets.map((obj) => obj);
         setWidgets(newState);
+    }
+
+    const removeLinkFromWidget = (widgetName, url) => {
+        const widget = widgets.find(obj => {
+            return obj.title === widgetName
+        });
+
+        widget.links = widget.links.filter((obj) => {
+            return obj.url.localeCompare(url) != 0
+        });
+
+        const newState = widgets.map((obj) => obj)
+        setWidgets(newState)
     }
 
     const openModal = (widgetName) => {
@@ -99,7 +112,9 @@ const Dashboard = () => {
         <>
             <div className="dashboard-grid">
                 {widgets.map((widget) => (
-                    <Widget title={widget.title} links={widget.links} openModal={openModal}/>
+                    <Widget title={widget.title} links={widget.links} 
+                    openModal={openModal} removeLink={removeLinkFromWidget}
+                    />
                 ))}
             </div>
             <MyVerticallyCenteredModal
