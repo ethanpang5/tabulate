@@ -94,11 +94,9 @@ const Dashboard = () => {
         const widget = widgets.find(obj => {
             return obj.title === widgetName
         });
-
         widget.links = widget.links.filter((obj) => {
-            return obj.url.localeCompare(url) != 0
+            return obj.url != url
         });
-
         const newState = widgets.map((obj) => obj)
         setWidgets(newState)
     }
