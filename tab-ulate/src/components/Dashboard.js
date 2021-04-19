@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap';
 
 import Widget from './Widget';
+import AddWidgetModal from './AddWidgetModal';
 
 function MyVerticallyCenteredModal(props) {
     const [website, setWebsite] = useState('');
@@ -15,7 +16,7 @@ function MyVerticallyCenteredModal(props) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        // console.log(website, url, props.currWidget);
+        console.log(website, url, props.currWidget);
         onHide();
         props.addLinkToWidget(website, url, props.currWidget)
     }
@@ -62,6 +63,7 @@ function MyVerticallyCenteredModal(props) {
 const Dashboard = () => {
     const [modalShow, setModalShow] = React.useState(false);
     const [currWidget, setCurrWidget] = React.useState('');
+    const [showWidgetModal, setShowWidgetModal] = useState(false);
     const [widgets, setWidgets] = React.useState([ 
         {
             title:"Classes", 
@@ -80,13 +82,28 @@ const Dashboard = () => {
             ]
         },
     ])
+    const [recents, setRecents] = useState([
+        {
+            title: 'Youtube',
+            url: 'https://www.youtube.com'
+        },
+        {
+            title: 'Netflix',
+            url: 'https://www.netflix.com'
+        },
+        {
+            title: 'Google',
+            url: 'https://www.google.com'
+        },
+    ])
+    const userEmail = "charlesming2002%40gmail.com"
     
     const addLinkToWidget = (website, url, widgetName) => {
         const toEdit = widgets.find(obj => {
             return obj.title === widgetName
         });
         toEdit.links.push({url: url, name: website});
-        const newState = widgets.map((obj) => obj);
+        const newState = widgets.map((obj) => obj)
         setWidgets(newState);
     }
 
@@ -95,7 +112,7 @@ const Dashboard = () => {
             return obj.title === widgetName
         });
         widget.links = widget.links.filter((obj) => {
-            return obj.url != url
+            return obj.url !== url
         });
         const newState = widgets.map((obj) => obj)
         setWidgets(newState)
@@ -106,20 +123,64 @@ const Dashboard = () => {
         setCurrWidget(widgetName);
     }
 
+    const openWidgetModal = () => {
+        setShowWidgetModal(true)
+    }
+
+    const addWidgetToDashboard = (title) => {
+        const old = widgets.map((obj) => obj)
+        old.push({title: title, links: []})
+        setWidgets(old);
+    }
+
+    const deleteWidget = (widgetName) => {
+        console.log('delete')
+        const newState = widgets.filter((obj) => {
+            return obj.title !== widgetName
+        })
+        setWidgets(newState)
+    }
+
     return (
         <>
             <div className="dashboard-grid">
                 {widgets.map((widget) => (
-                    <Widget title={widget.title} links={widget.links} 
-                    openModal={openModal} removeLink={removeLinkFromWidget}
-                    />
+                    <Widget title={widget.title} links={widget.links}
+                    openModal={openModal} removeLink={removeLinkFromWidget} deleteWidget={deleteWidget}/>
                 ))}
+                <div className="widget">
+                    <div className="widget-header">
+                        <a className="widget-title">Recents</a>
+                    </div>
+                    <div className="widget-grid" id="recents">
+                        {recents.map((recent) => (
+                            <div>
+                                <a href={recent.url} target="_blank" className="classes-link">{recent.title}</a>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="widget">
+                    <div className="widget-header">
+                        <a className="widget-title">Calendar</a>
+                    </div>
+                    <iframe src={"https://www.google.com/calendar/embed?src=" + userEmail + "&ctz=America%2FLos_Angeles"}
+                            title="calendar"
+                            width="100%" height="400" frameborder="0" scrolling="no"
+                    />
+                </div>
             </div>
+            <button type="button" class="btn btn-primary" onClick={() => openWidgetModal()}>Add widget</button>
             <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 currWidget={currWidget}
                 addLinkToWidget={addLinkToWidget}
+            />
+            <AddWidgetModal
+                show={showWidgetModal}
+                onHide={() => setShowWidgetModal(false)}
+                addWidgetToDashboard={addWidgetToDashboard}
             />
         </>
     )

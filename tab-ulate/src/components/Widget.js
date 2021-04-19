@@ -2,7 +2,7 @@ import React from 'react';
 
 import WidgetLink from './WidgetLink';
 
-const Widget = ({title, links, openModal, removeLink}) => {
+const Widget = ({title, links, openModal, removeLink, deleteWidget}) => {
     const removeLinkFromThisWidget = (url) => {
         removeLink(title, url);
     }
@@ -17,11 +17,12 @@ const Widget = ({title, links, openModal, removeLink}) => {
             <div className="widget-header">
                 <a className="widget-title">{title}</a>
                 <div className="widget-control">
+                    <a onClick={() => deleteWidget(title)}>delete</a>
                     <a onClick={openAllLinks}>open all</a>
                     <a onClick={() => openModal(title)}>new</a>
                 </div>
             </div>
-            <div className="widget-grid" id="classes">
+            <div className="widget-grid">
                 {links.map((lnk) => (
                     <WidgetLink link={lnk} removeLink={removeLinkFromThisWidget}/>
                 ))}

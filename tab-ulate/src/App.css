@@ -37,6 +37,7 @@
 .widget-control a:hover {
   background: #ddd;
   color: black;
+  cursor: pointer;
 }
 
 .dashboard-grid {
