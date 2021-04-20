@@ -3,6 +3,8 @@ import { Modal, Button, Form } from 'react-bootstrap';
 
 import Widget from './Widget';
 import AddWidgetModal from './AddWidgetModal';
+import {signIn, signOut, initFirebaseAuth, bruh} from "../scripts/login.js"
+
 
 function MyVerticallyCenteredModal(props) {
     const [website, setWebsite] = useState('');
@@ -10,7 +12,7 @@ function MyVerticallyCenteredModal(props) {
 
     const onHide = () => { 
         props.onHide();
-        setWebsite('');
+        setWebste('');
         setUrl('');
     }
 
@@ -20,6 +22,8 @@ function MyVerticallyCenteredModal(props) {
         onHide();
         props.addLinkToWidget(website, url, props.currWidget)
     }
+
+    const useEffect = (() => {bruh()}, [])
     
 
     return (
