@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap';
 
 import Widget from './Widget';
 import AddWidgetModal from './AddWidgetModal';
-import {signIn, signOut, initFirebaseAuth, bruh} from "../scripts/login.js"
-
+import { auth, bruh, addWidget} from "../scripts/login.js"
+import { UserContext } from "../providers/UserProvider"
 
 
 function MyVerticallyCenteredModal(props) {
@@ -65,6 +65,7 @@ function MyVerticallyCenteredModal(props) {
   
 
 const Dashboard = () => {
+    const user = useContext(UserContext);
     const [modalShow, setModalShow] = React.useState(false);
     const [currWidget, setCurrWidget] = React.useState('');
     const [showWidgetModal, setShowWidgetModal] = useState(false);
@@ -100,7 +101,10 @@ const Dashboard = () => {
             url: 'https://www.google.com'
         },
     ])
-    const useEffect = (() => {bruh()}, [])
+
+    useEffect (() => {
+        bruh()
+    }, [])
 
     const userEmail = "charlesming2002%40gmail.com"
     
@@ -137,6 +141,7 @@ const Dashboard = () => {
         const old = widgets.map((obj) => obj)
         old.push({title: title, links: []})
         setWidgets(old);
+        addWidget('test')
     }
 
     const deleteWidget = (widgetName) => {
@@ -149,45 +154,51 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className="dashboard-grid">
-                {widgets.map((widget) => (
-                    <Widget title={widget.title} links={widget.links}
-                    openModal={openModal} removeLink={removeLinkFromWidget} deleteWidget={deleteWidget}/>
-                ))}
-                <div className="widget">
-                    <div className="widget-header">
-                        <a className="widget-title">Recents</a>
+        {user ? 
+            <>
+                <div className="dashboard-grid">
+                    {widgets.map((widget) => (
+                        <Widget title={widget.title} links={widget.links}
+                        openModal={openModal} removeLink={removeLinkFromWidget} deleteWidget={deleteWidget}/>
+                    ))}
+                    <div className="widget">
+                        <div className="widget-header">
+                            <a className="widget-title">Recents</a>
+                        </div>
+                        <div className="widget-grid" id="recents">
+                            {recents.map((recent) => (
+                                <div>
+                                    <a href={recent.url} target="_blank" className="classes-link">{recent.title}</a>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    <div className="widget-grid" id="recents">
-                        {recents.map((recent) => (
-                            <div>
-                                <a href={recent.url} target="_blank" className="classes-link">{recent.title}</a>
-                            </div>
-                        ))}
+                    <div className="widget">
+                        <div className="widget-header">
+                            <a className="widget-title">Calendar</a>
+                        </div>
+                        <iframe src={"https://www.google.com/calendar/embed?src=" + userEmail + "&ctz=America%2FLos_Angeles"}
+                                title="calendar"
+                                width="100%" height="400" frameborder="0" scrolling="no"
+                        />
                     </div>
                 </div>
-                <div className="widget">
-                    <div className="widget-header">
-                        <a className="widget-title">Calendar</a>
-                    </div>
-                    <iframe src={"https://www.google.com/calendar/embed?src=" + userEmail + "&ctz=America%2FLos_Angeles"}
-                            title="calendar"
-                            width="100%" height="400" frameborder="0" scrolling="no"
-                    />
-                </div>
-            </div>
-            <button type="button" class="btn btn-primary" onClick={() => openWidgetModal()}>Add widget</button>
-            <MyVerticallyCenteredModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                currWidget={currWidget}
-                addLinkToWidget={addLinkToWidget}
-            />
-            <AddWidgetModal
-                show={showWidgetModal}
-                onHide={() => setShowWidgetModal(false)}
-                addWidgetToDashboard={addWidgetToDashboard}
-            />
+                <button type="button" class="btn btn-primary" onClick={() => openWidgetModal()}>Add widget</button>
+                <MyVerticallyCenteredModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    currWidget={currWidget}
+                    addLinkToWidget={addLinkToWidget}
+                />
+                <AddWidgetModal
+                    show={showWidgetModal}
+                    onHide={() => setShowWidgetModal(false)}
+                    addWidgetToDashboard={addWidgetToDashboard}
+                />
+            </>
+            :
+            <h1>Please Sign in</h1>
+        }
         </>
     )
 }

@@ -11,6 +11,7 @@ import {
 import './App.css';
 import { NavbarComponent } from "./components/NavbarComponent";
 import Dashboard from "./components/Dashboard";
+import UserProvider from "./providers/UserProvider";
 
 function App() {
   console.log('new');
@@ -37,6 +38,7 @@ function App() {
   // }
 
   return (
+    <UserProvider>
     <Router>
       <div>
         <NavbarComponent/>
@@ -53,6 +55,7 @@ function App() {
           </Switch>
       </div>
     </Router>
+    </UserProvider>
   );
 }
 
