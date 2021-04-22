@@ -15,5 +15,9 @@
     "background",
     "history"
   ],
-  "content_security_policy": "script-src 'self' 'sha256-nbtbO2Ff+c0XNpOB5Rz3Ud0jnbyJVMBat96xteFmGRw='; object-src 'self'"
+
+
+
+  "content_security_policy": "script-src 'self' 'sha256-nbtbO2Ff+c0XNpOB5Rz3Ud0jnbyJVMBat96xteFmGRw=' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'"
+  
 }

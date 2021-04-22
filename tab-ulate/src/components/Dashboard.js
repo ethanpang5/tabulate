@@ -6,13 +6,14 @@ import AddWidgetModal from './AddWidgetModal';
 import {signIn, signOut, initFirebaseAuth, bruh} from "../scripts/login.js"
 
 
+
 function MyVerticallyCenteredModal(props) {
     const [website, setWebsite] = useState('');
     const [url, setUrl] = useState('');
 
     const onHide = () => { 
         props.onHide();
-        setWebste('');
+        setWebsite('');
         setUrl('');
     }
 
@@ -23,7 +24,6 @@ function MyVerticallyCenteredModal(props) {
         props.addLinkToWidget(website, url, props.currWidget)
     }
 
-    const useEffect = (() => {bruh()}, [])
     
 
     return (
@@ -100,6 +100,8 @@ const Dashboard = () => {
             url: 'https://www.google.com'
         },
     ])
+    const useEffect = (() => {bruh()}, [])
+
     const userEmail = "charlesming2002%40gmail.com"
     
     const addLinkToWidget = (website, url, widgetName) => {
