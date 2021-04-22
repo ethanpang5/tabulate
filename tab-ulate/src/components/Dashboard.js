@@ -3,7 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 
 import Widget from './Widget';
 import AddWidgetModal from './AddWidgetModal';
-import { auth, bruh, addWidget} from "../scripts/login.js"
+import { bruh, addWidget, addLinkToWidget as addLink } from "../scripts/login.js"
 import { UserContext } from "../providers/UserProvider"
 
 
@@ -106,7 +106,7 @@ const Dashboard = () => {
         bruh()
     }, [])
 
-    const userEmail = "charlesming2002%40gmail.com"
+    const userEmail = user?.email?.replace('@', '%40') //"charlesming2002%40gmail.com"
     
     const addLinkToWidget = (website, url, widgetName) => {
         const toEdit = widgets.find(obj => {
@@ -115,6 +115,7 @@ const Dashboard = () => {
         toEdit.links.push({url: url, name: website});
         const newState = widgets.map((obj) => obj)
         setWidgets(newState);
+        addLink(widgetName, website, url) //sync firebase
     }
 
     const removeLinkFromWidget = (widgetName, url) => {
@@ -141,7 +142,7 @@ const Dashboard = () => {
         const old = widgets.map((obj) => obj)
         old.push({title: title, links: []})
         setWidgets(old);
-        addWidget('test')
+        addWidget(title) //sync firebase
     }
 
     const deleteWidget = (widgetName) => {
