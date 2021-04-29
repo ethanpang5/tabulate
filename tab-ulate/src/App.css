@@ -3,9 +3,9 @@
 }
 
 .widget {
-  border: 1px solid gray;
-  border-radius: 1em;
-  box-shadow: 3px 3px 3px grey;
+  border: 1px solid black;
+  border-radius: 1rem;
+  box-shadow: 3px 3px 3px gray;
 }
 
 .widget-header {
@@ -64,4 +64,13 @@
   height: 70%;
   text-align: center;
   align-items: center;
+}
+.action-button {
+  display: flex;
+  float: right;
+  justify-content: center;
+  height: 70%;
+  text-align: center;
+  align-items: center;
+  margin-left: 5px;
 }

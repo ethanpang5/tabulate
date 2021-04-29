@@ -1,34 +1,46 @@
-import React from 'react';
+import React from "react";
 
-import WidgetLink from './WidgetLink';
+import WidgetLink from "./WidgetLink";
 
-const Widget = ({title, links, openModal, removeLink, deleteWidget}) => {
-    const removeLinkFromThisWidget = (url) => {
-        removeLink(title, url);
+const Widget = ({ title, links, openModal, removeLink, deleteWidget }) => {
+  const removeLinkFromThisWidget = (url) => {
+    removeLink(title, url);
+  };
+  const openAllLinks = () => {
+    console.log("here");
+    for (let i = 0; i < links.length; i++) {
+      window.open(links[i].url, "_blank");
     }
-    const openAllLinks = () => {
-        console.log('here')
-        for (let i=0; i < links.length; i++) {
-            window.open(links[i].url, "_blank")
-        }
-    }
-    return (
-        <div className="widget">
-            <div className="widget-header">
-                <a className="widget-title">{title}</a>
-                <div className="widget-control">
-                    <a onClick={() => deleteWidget(title)}>delete</a>
-                    <a onClick={openAllLinks}>open all</a>
-                    <a onClick={() => openModal(title)}>new</a>
-                </div>
-            </div>
-            <div className="widget-grid">
-                {links.map((lnk) => (
-                    <WidgetLink link={lnk} removeLink={removeLinkFromThisWidget}/>
-                ))}
-            </div>
+  };
+  return (
+    <div className="widget">
+      <div className="widget-header">
+        <div className="widget-title">{title}</div>
+        <div className="widget-control">
+          <button
+            class="btn btn-dark action-button"
+            onClick={() => deleteWidget(title)}
+          >
+            delete
+          </button>
+          <button class="btn btn-dark action-button" onClick={openAllLinks}>
+            open all
+          </button>
+          <button
+            class="btn btn-dark action-button"
+            onClick={() => openModal(title)}
+          >
+            new
+          </button>
         </div>
-    )
-}
+      </div>
+      <div className="widget-grid">
+        {links.map((lnk) => (
+          <WidgetLink link={lnk} removeLink={removeLinkFromThisWidget} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
-export default Widget
+export default Widget;
