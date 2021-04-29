@@ -10,6 +10,7 @@ import {
 
 import './App.css';
 import { NavbarComponent } from "./components/NavbarComponent";
+import { signIn, getWidgets as getWidgetsFirebase } from "./scripts/login.js";
 import Dashboard from "./components/Dashboard";
 import UserProvider from "./providers/UserProvider";
 
@@ -36,13 +37,27 @@ function App() {
   //     url: "https://cs61a.org",
   //   });
   // }
+  const [widgets, getWidgets] = useState([])
+
+  async function load() {
+    console.log("start loading");
+    signIn().then(() => {
+      getWidgets(getWidgetsFirebase());
+      console.log("loaded");
+      console.log(widgets);
+    }).catch(function (error) {
+      console.error("Error loading widgets", error);
+    });
+    
+  }
 
   return (
     <UserProvider>
     <Router>
       <div>
-        <NavbarComponent/>
-        <Switch>
+        <NavbarComponent signIn={load}/>
+        <Dashboard widgets={widgets}/>
+        {/* <Switch>
             <Route path="/analytics">
               <h1>Analytics</h1>
             </Route>
@@ -52,7 +67,7 @@ function App() {
             <Route path="/">
               <Dashboard/>
             </Route>
-          </Switch>
+          </Switch> */}
       </div>
     </Router>
     </UserProvider>

@@ -36,7 +36,7 @@ export const NavbarComponent = (props) => {
           <Button onClick={handleSignOut}>Sign out</Button>
         </>
       ) : (
-        <Button onClick={signIn}>Sign in</Button>
+        <Button onClick={props.signIn}>Sign in</Button>
       )}
     </Navbar>
   );

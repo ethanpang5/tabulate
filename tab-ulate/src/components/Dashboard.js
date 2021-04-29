@@ -76,38 +76,38 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const user = useContext(UserContext);
   const [modalShow, setModalShow] = React.useState(false);
   const [currWidget, setCurrWidget] = React.useState("");
   const [showWidgetModal, setShowWidgetModal] = useState(false);
-  //   const [widgets, setWidgets] = useState(getWidgetsFirebase());
-  const [widgets, setWidgets] = React.useState([
-    {
-      title: "Classes",
-      links: [
-        { url: "sp21.datastructur.es", name: "CS61B" },
-        {
-          url:
-            "https://www.notion.so/Cubstart-Intro-to-Building-Apps-d42282d66dd942c399b6ce87167889d6",
-          name: "Cubstart",
-        },
-        { url: "https://www.eecs70.org/", name: "CS70" },
-      ],
-    },
-    {
-      title: "Favorites",
-      links: [
-        { url: "sp21.datastructur.es", name: "weird link" },
-        {
-          url:
-            "https://www.notion.so/Cubstart-Intro-to-Building-Apps-d42282d66dd942c399b6ce87167889d6",
-          name: "Cubstart",
-        },
-        { url: "https://www.eecs70.org/", name: "CS70" },
-      ],
-    },
-  ]);
+  const [widgets, setWidgets] = useState(props.widgets);
+  // const [widgets, setWidgets] = React.useState([
+  //   {
+  //     title: "Classes",
+  //     links: [
+  //       { url: "sp21.datastructur.es", name: "CS61B" },
+  //       {
+  //         url:
+  //           "https://www.notion.so/Cubstart-Intro-to-Building-Apps-d42282d66dd942c399b6ce87167889d6",
+  //         name: "Cubstart",
+  //       },
+  //       { url: "https://www.eecs70.org/", name: "CS70" },
+  //     ],
+  //   },
+  //   {
+  //     title: "Favorites",
+  //     links: [
+  //       { url: "sp21.datastructur.es", name: "weird link" },
+  //       {
+  //         url:
+  //           "https://www.notion.so/Cubstart-Intro-to-Building-Apps-d42282d66dd942c399b6ce87167889d6",
+  //         name: "Cubstart",
+  //       },
+  //       { url: "https://www.eecs70.org/", name: "CS70" },
+  //     ],
+  //   },
+  // ]);
   const [recents, setRecents] = useState([
     {
       title: "Youtube",
@@ -173,18 +173,14 @@ const Dashboard = () => {
   };
 
   const getWidgets = async () => {
-    // let w = await getWidgetsFirebase();
-    getWidgetsFirebase().then((w) => {
-      setWidgets(w);
-    });
+    
   };
 
   return (
     <>
       {user ? (
         <>
-          {/* {getWidgets()} */}
-          <div className="dashboard-grid">
+         <div className="dashboard-grid">
             {widgets.map((widget) => (
               <Widget
                 title={widget.title}

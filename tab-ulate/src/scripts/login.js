@@ -39,26 +39,30 @@ export const auth = firebase.auth();
 export function signIn() {
   // TODO 1: Sign in Firebase with credential from the Google user.
   // Sign into Firebase using popup auth & Google as the identity provider.
-  let provider = new firebase.auth.GoogleAuthProvider();
-  firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then(() => {
-      let user = firebase.firestore().collection("users").doc(getUserName());
-      user.get().then((doc) => {
-        if (!doc.exists) {
-          return user
-            .set({
-              name: getUserName(),
-              widgets: [], // do this at sign-in
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            })
-            .catch(function (error) {
-              console.error("Error writing new message to database", error);
-            });
-        }
+  return new Promise(() => {
+    let provider = new firebase.auth.GoogleAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(() => {
+        let user = firebase.firestore().collection("users").doc(getUserName());
+        user.get().then((doc) => {
+          if (!doc.exists) {
+            user
+              .set({
+                name: getUserName(),
+                widgets: [], // do this at sign-in
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              })
+              .catch(function (error) {
+                console.error("Error writing new message to database", error);
+              });
+          }
+        });
+      }).catch(function (error) {
+        console.error("Error signing in", error);
       });
-    });
+  });
 }
 
 // Signs-out of TabUlate.
@@ -137,17 +141,15 @@ export function addWidget(widgetTitle) {
 
 export function getWidgets() {
   // returns the current user's widgets
-  return new Promise((resolve) => {
-    let user = firebase.firestore().collection("users").doc(getUserName());
-    user.get().then((doc) => {
-      if (doc.exists) {
-        console.log("doc exists");
-        console.log(doc.data().widgets);
-        return doc.data().widgets;
-      } else {
-        console.log("doc doesn't exit");
-      }
-    });
+  let user = firebase.firestore().collection("users").doc(getUserName());
+  user.get().then((doc) => {
+    if (doc.exists) {
+      console.log("doc exists");
+      console.log(doc.data().widgets);
+      return doc.data().widgets;
+    } else {
+      console.log("doc doesn't exit");
+    }
   });
 }
 
