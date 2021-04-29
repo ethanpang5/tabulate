@@ -43,13 +43,13 @@ function App() {
       <div>
         <NavbarComponent/>
         <Switch>
-            <Route path="/analytics">
+            <Route path="/index.html/analytics">
               <h1>Analytics</h1>
             </Route>
-            <Route path="/settings">
+            <Route path="/index.html/settings">
               <h1>Settings</h1>
             </Route>
-            <Route path="/">
+            <Route path="/index.html">
               <Dashboard/>
             </Route>
           </Switch>

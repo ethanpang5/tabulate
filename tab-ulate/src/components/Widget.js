@@ -1,3 +1,4 @@
+/*global chrome*/
 import React from 'react';
 
 import WidgetLink from './WidgetLink';
@@ -6,12 +7,14 @@ const Widget = ({title, links, openModal, removeLink, deleteWidget}) => {
     const removeLinkFromThisWidget = (url) => {
         removeLink(title, url);
     }
-    const openAllLinks = () => {
-        console.log('here')
+
+    const openAllLinks = async () => {
         for (let i=0; i < links.length; i++) {
-            window.open(links[i].url, "_blank")
+            // window.open(links[i].url, "_blank")
+            await chrome.tabs.create({ url: links[i].url })
         }
     }
+
     return (
         <div className="widget">
             <div className="widget-header">

@@ -1,3 +1,4 @@
+/*global chrome*/
 import React, { useState, useEffect, useContext } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap';
 
@@ -73,7 +74,7 @@ const Dashboard = () => {
         {
             title:"Classes", 
             links: [
-                {url: 'sp21.datastructur.es', name: 'CS61B'},
+                {url: 'https://sp21.datastructur.es', name: 'CS61B'},
                 {url: 'https://www.notion.so/Cubstart-Intro-to-Building-Apps-d42282d66dd942c399b6ce87167889d6', name: 'Cubstart'},
                 {url: 'https://www.eecs70.org/', name: 'CS70'},
             ]
@@ -81,29 +82,23 @@ const Dashboard = () => {
         {
             title:"Favorites", 
             links: [
-                {url: 'sp21.datastructur.es', name: 'weird link'},
+                {url: 'https://sp21.datastructur.es', name: 'weird link'},
                 {url: 'https://www.notion.so/Cubstart-Intro-to-Building-Apps-d42282d66dd942c399b6ce87167889d6', name: 'Cubstart'},
                 {url: 'https://www.eecs70.org/', name: 'CS70'},
             ]
         },
     ])
-    const [recents, setRecents] = useState([
-        {
-            title: 'Youtube',
-            url: 'https://www.youtube.com'
-        },
-        {
-            title: 'Netflix',
-            url: 'https://www.netflix.com'
-        },
-        {
-            title: 'Google',
-            url: 'https://www.google.com'
-        },
-    ])
+    const [recents, setRecents] = useState([])
 
     useEffect (() => {
-        bruh()
+        chrome.history.search({text: '', maxResults: 10}, function(data) {
+                const updated = []
+                data.forEach(function(page) {
+                    updated.push({ title: page.title, url: page.url })
+                    console.log(updated)
+                });
+                setRecents(updated);
+              });
     }, [])
 
     const userEmail = user?.email?.replace('@', '%40') //"charlesming2002%40gmail.com"
