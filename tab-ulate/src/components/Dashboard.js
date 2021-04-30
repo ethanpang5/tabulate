@@ -189,7 +189,7 @@ const Dashboard = () => {
     <>
       {user ? (
         <>
-         <div className="dashboard-grid">
+          <div className="dashboard-grid">
             {widgets.map((widget) => (
               <Widget
                 title={widget.title}
@@ -201,7 +201,7 @@ const Dashboard = () => {
             ))}
             <div className="widget">
               <div className="widget-header">
-                <a className="widget-title">Recents</a>
+                <div className="widget-title">Recents</div>
               </div>
               <div className="widget-grid" id="recents">
                 {recents.map((recent) => (
@@ -219,7 +219,7 @@ const Dashboard = () => {
             </div>
             <div className="widget">
               <div className="widget-header">
-                <a className="widget-title">Calendar</a>
+                <div className="widget-title">Calendar</div>
               </div>
               <iframe
                 src={

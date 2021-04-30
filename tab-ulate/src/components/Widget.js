@@ -21,7 +21,7 @@ const Widget = ({ title, links, openModal, removeLink, deleteWidget }) => {
             class="btn btn-dark btn-sm action-button"
             onClick={() => deleteWidget(title)}
           >
-            delete
+            delete widget
           </button>
           <button
             class="btn btn-secondary btn-sm action-button"
@@ -33,7 +33,7 @@ const Widget = ({ title, links, openModal, removeLink, deleteWidget }) => {
             class="btn btn-success btn-sm action-button"
             onClick={() => openModal(title)}
           >
-            new
+            new link
           </button>
         </div>
       </div>
