@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { signIn, signOut, getProfilePicUrl } from "../scripts/login.js";
 import { UserContext } from "../providers/UserProvider";
 
-export const NavbarComponent = (props) => {
+export const NavbarComponent = () => {
   const user = useContext(UserContext);
-  console.log(user);
+  // console.log("navbar:", user);
 
   const handleSignOut = async () => {
     await signOut();
@@ -36,7 +36,7 @@ export const NavbarComponent = (props) => {
           <Button onClick={handleSignOut}>Sign out</Button>
         </>
       ) : (
-        <Button onClick={props.signIn}>Sign in</Button>
+        <Button onClick={signIn}>Sign in</Button>
       )}
     </Navbar>
   );
