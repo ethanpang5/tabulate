@@ -34,7 +34,6 @@ firebase.initializeApp(firebaseConfig);
 console.log(firebase);
 
 export const auth = firebase.auth();
-export const db = firebase.firestore();
 
 // Signs-in to TabUlate.
 export function signIn() {
@@ -140,6 +139,8 @@ export function addWidget(widgetTitle) {
 
 export function getWidgets() {
   // returns the current user's widgets
+
+  return new Promise(() => {
     let user = firebase.firestore().collection("users").doc(getUserName());
     console.log("firebase:", user)
     user.get().then((doc) => {
@@ -149,7 +150,10 @@ export function getWidgets() {
       } else {
         console.log("doc doesn't exit");
       }
-    })
+    });
+  })
+
+  
 }
 
 export function addLinkToWidget(widgetName, website, url) {
