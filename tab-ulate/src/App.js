@@ -53,23 +53,23 @@ function App() {
 
   return (
     <UserProvider>
-    <Router>
-      <div>
-        <NavbarComponent signIn={load}/>
-        <Dashboard widgets={widgets}/>
-        {/* <Switch>
-            <Route path="/analytics">
-              <h1>Analytics</h1>
-            </Route>
-            <Route path="/settings">
-              <h1>Settings</h1>
-            </Route>
-            <Route path="/">
-              <Dashboard/>
-            </Route>
-          </Switch> */}
-      </div>
-    </Router>
+      <Router>
+        <div>
+          <NavbarComponent/>
+          <Dashboard/>
+          {/* <Switch>
+              <Route path="/analytics">
+                <h1>Analytics</h1>
+              </Route>
+              <Route path="/settings">
+                <h1>Settings</h1>
+              </Route>
+              <Route path="/">
+                <Dashboard/>
+              </Route>
+            </Switch> */}
+        </div>
+      </Router>
     </UserProvider>
   );
 }

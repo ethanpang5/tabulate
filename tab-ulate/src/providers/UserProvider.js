@@ -11,13 +11,10 @@ export default (props) => {
     auth.onAuthStateChanged(async (user) => {
         if (user) {
             const { displayName, email }  = user;
-            setuser({
-                displayName,
-                email
-            })
+            setuser(user)
           }
         })
-        console.log(user)
+        console.log("userprovider", user)
   },[])
 
   return (

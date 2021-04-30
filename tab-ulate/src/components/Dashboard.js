@@ -76,12 +76,25 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
-const Dashboard = (props) => {
+const Dashboard = () => {
   const user = useContext(UserContext);
+  // console.log("dashboard:", user)
   const [modalShow, setModalShow] = React.useState(false);
   const [currWidget, setCurrWidget] = React.useState("");
   const [showWidgetModal, setShowWidgetModal] = useState(false);
-  const [widgets, setWidgets] = useState(props.widgets);
+  const [widgets, setWidgets] = useState([]);
+
+  useEffect(async () => {
+    // console.log("outside if", user)
+    if (user) {
+      console.log("use effect")
+      let w = await getWidgetsFirebase()
+      setWidgets(w);
+      console.log("w:", w)
+    }
+    
+  },[user])
+
   // const [widgets, setWidgets] = React.useState([
   //   {
   //     title: "Classes",
@@ -171,8 +184,6 @@ const Dashboard = (props) => {
     setWidgets(newState);
     deleteWidgetFirebase(widgetName);
   };
-
-  const getWidgets = async () => {};
 
   return (
     <>
