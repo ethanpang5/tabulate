@@ -87,13 +87,12 @@ const Dashboard = () => {
   useEffect(async () => {
     // console.log("outside if", user)
     if (user) {
-      console.log("use effect")
-      let w = await getWidgetsFirebase()
+      console.log("use effect");
+      let w = await getWidgetsFirebase();
       setWidgets(w);
-      console.log("w:", w)
+      console.log("w:", w);
     }
-    
-  },[user])
+  }, [user]);
 
   // const [widgets, setWidgets] = React.useState([
   //   {
@@ -235,13 +234,16 @@ const Dashboard = () => {
               />
             </div>
           </div>
-          <button
-            type="button"
-            class="btn btn-primary"
-            onClick={() => openWidgetModal()}
-          >
-            Add widget
-          </button>
+          <div class="addWidgetContainer">
+            <button
+              class="addWidgetButton"
+              type="button"
+              class="btn btn-primary"
+              onClick={() => openWidgetModal()}
+            >
+              Add widget
+            </button>
+          </div>
           <MyVerticallyCenteredModal
             show={modalShow}
             onHide={() => setModalShow(false)}

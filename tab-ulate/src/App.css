@@ -6,6 +6,16 @@
   font-size: 100px;
 }
 
+.addWidgetContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 1rem;
+}
+
+.addWidgetContainer button {
+  width: 33%;
+}
+
 .widget {
   border: 1px solid lightgray;
   border-radius: 4px;
