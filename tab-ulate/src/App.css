@@ -2,26 +2,55 @@
   text-align: center;
 }
 
+.mainTitle {
+  font-size: 100px;
+}
+
+.addWidgetContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 1rem;
+}
+
+.addWidgetContainer button {
+  width: 33%;
+}
+
 .widget {
-  border: 1px solid gray;
-  border-radius: 1em;
-  box-shadow: 3px 3px 3px grey;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  background-color: white;
+
+  flex-grow: 1;
+  flex-shrink: 2;
+
+  margin: 1rem;
+  /* padding: 7px; */
+}
+
+.widget:hover {
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
 .widget-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 1px solid black;
+  border-bottom: 0px solid black;
 }
 
 .widget-title {
   padding-left: 1rem;
-  font-size: 150%;
+  padding-right: 1rem;
+  font-size: 175%;
+  font-family: "Open Sans", monospace;
+  font-weight: normal;
 }
 
 .widget-control {
   align-self: center;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .widget-control a {
@@ -41,27 +70,90 @@
 }
 
 .dashboard-grid {
-  display: grid;
+  /* display: grid;
   grid-template-columns: auto auto;
   grid-gap: 20px;
   padding: 20px;
+  background-color: #f5f5f5; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: space-around;
 }
 
 .widget-grid {
-  display: grid;
+  /* display: grid;
   grid-template-columns: auto auto;
   grid-gap: 10px;
+  padding: 10px; */
+  /* display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: flex-start;
   padding: 10px;
+  margin: 5px; */
 }
 .widget-grid div {
   background-color: aliceblue;
   text-align: center;
 }
 .delete-button {
-  display: flex;
-  float: right;
   justify-content: center;
-  height: 70%;
+  height: 100%;
   text-align: center;
   align-items: center;
+}
+.action-button {
+  display: flex;
+  float: right;
+  flex-shrink: 10;
+  justify-content: center;
+  text-align: center;
+  margin-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+}
+
+.widget-control .action-button {
+  color: white;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.widget-control .action-button:hover {
+  background: lightgray;
+  border-color: black;
+  color: black;
+  cursor: pointer;
+}
+
+.widget-link {
+  padding: 2px;
+  margin: 5px;
+  display: flex;
+}
+
+.widget-link a {
+  flex-grow: 1;
+}
+
+.widget-link a:hover {
+  background: lightgray;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#recents {
+  height: 400px;
+  overflow: auto;
 }
