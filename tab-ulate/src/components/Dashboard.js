@@ -194,7 +194,7 @@ const Dashboard = (props) => {
               </div>
               <div className="widget-grid" id="recents">
                 {recents.map((recent) => (
-                  <div>
+                  <div className="widget-link">
                     <a
                       href={recent.url}
                       target="_blank"
