@@ -9,6 +9,7 @@ import {
   getWidgets as getWidgetsFirebase,
   addLinkToWidget as addLinkFirebase,
   deleteLink as deleteLinkFirebase,
+  db,
 } from "../scripts/login.js";
 import { UserContext } from "../providers/UserProvider";
 
@@ -136,6 +137,22 @@ const Dashboard = () => {
   ]);
 
   const userEmail = user?.email?.replace("@", "%40"); //"charlesming2002%40gmail.com"
+
+  const fetchWidgets = async (user) => {
+    const response = db.collection("users").doc(user.displayName);
+    const data = await response.get();
+    const w = await data.data().widgets;
+    console.log("w", w);
+    setWidgets(w);
+  };
+
+  useEffect(() => {
+    console.log("outside if", user);
+    if (user) {
+      console.log("inside", user);
+      fetchWidgets(user);
+    }
+  }, [user]);
 
   const addLinkToWidget = (website, url, widgetName) => {
     const toEdit = widgets.find((obj) => {
