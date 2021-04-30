@@ -9,10 +9,7 @@ import {
   getWidgets as getWidgetsFirebase,
   addLinkToWidget as addLinkFirebase,
   deleteLink as deleteLinkFirebase,
-<<<<<<< HEAD
   db,
-=======
->>>>>>> parent of bdc81b4 (getWidgets)
 } from "../scripts/login.js";
 import { UserContext } from "../providers/UserProvider";
 
@@ -88,25 +85,13 @@ const Dashboard = () => {
   const [showWidgetModal, setShowWidgetModal] = useState(false);
   const [widgets, setWidgets] = useState([]);
 
-  useEffect(async () => {
-    // console.log("outside if", user)
+  useEffect(() => {
+    console.log("outside if", user);
     if (user) {
-<<<<<<< HEAD
-      console.log("use effect");
-      let w = await getWidgetsFirebase();
-      setWidgets(w);
-      console.log("w:", w);
+      console.log("inside", user);
+      fetchWidgets(user);
     }
   }, [user]);
-=======
-      console.log("use effect")
-      let w = await getWidgetsFirebase()
-      setWidgets(w);
-      console.log("w:", w)
-    }
-    
-  },[user])
->>>>>>> parent of bdc81b4 (getWidgets)
 
   // const [widgets, setWidgets] = React.useState([
   //   {
@@ -151,7 +136,6 @@ const Dashboard = () => {
 
   const userEmail = user?.email?.replace("@", "%40"); //"charlesming2002%40gmail.com"
 
-<<<<<<< HEAD
   const fetchWidgets = async (user) => {
     const response = db.collection("users").doc(user.displayName);
     const data = await response.get();
@@ -168,8 +152,6 @@ const Dashboard = () => {
     }
   }, [user]);
 
-=======
->>>>>>> parent of bdc81b4 (getWidgets)
   const addLinkToWidget = (website, url, widgetName) => {
     const toEdit = widgets.find((obj) => {
       return obj.title === widgetName;
