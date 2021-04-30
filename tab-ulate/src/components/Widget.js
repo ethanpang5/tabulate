@@ -3,7 +3,7 @@ import React from 'react';
 
 import WidgetLink from "./WidgetLink";
 
-const Widget = ({ title, links, openModal, removeLink, deleteWidget }) => {
+const Widget = ({ title, links, openModal, removeLink, deleteWidget, isActive, onClick }) => {
   const removeLinkFromThisWidget = (url) => {
     removeLink(title, url);
   };
@@ -14,7 +14,7 @@ const Widget = ({ title, links, openModal, removeLink, deleteWidget }) => {
     }
   }
   return (
-    <div className="widget">
+    <div className="widget" id={isActive ? "active-widget" : "not-active"} onClick={onClick}>
       <div className="widget-header">
         <div className="widget-title">{title}</div>
         <div className="widget-control">

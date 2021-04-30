@@ -173,6 +173,11 @@ const Dashboard = () => {
                 openModal={openModal}
                 removeLink={removeLinkFromWidget}
                 deleteWidget={deleteWidget}
+                isActive={ currWidget === widget.title }
+                onClick = { () => {
+                  console.log(widget.title)
+                  setCurrWidget(widget.title) 
+                  }}
               />
             ))}
             <div className="widget">
@@ -189,6 +194,18 @@ const Dashboard = () => {
                     >
                       {recent.title}
                     </a>
+                    { currWidget ? 
+                      <button
+                        class="btn btn-success btn-xs"
+                        onClick={() => {
+                          if (currWidget) {
+                            addLinkToWidget(recent.title, recent.url, currWidget)
+                          }
+                          }}
+                      >
+                        +
+                      </button>
+                    : null}
                   </div>
                 ))}
               </div>
