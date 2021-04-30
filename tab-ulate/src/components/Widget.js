@@ -2,7 +2,10 @@ import React from "react";
 
 import WidgetLink from "./WidgetLink";
 
-const Widget = ({ title, links, openModal, removeLink, deleteWidget }) => {
+const Widget = ({ title, links, openModal, removeLink, deleteWidget, changeWidgetTitle }) => {
+  const [widgetTitle, setWidgetTitle] = React.useState(title)
+
+
   const removeLinkFromThisWidget = (url) => {
     removeLink(title, url);
   };
@@ -12,10 +15,25 @@ const Widget = ({ title, links, openModal, removeLink, deleteWidget }) => {
       window.open(links[i].url, "_blank");
     }
   };
+
+  const changeTitle = (event) => {
+    const newTitle = event.target.value;
+    // setWidgetTitle(newTitle);
+    console.log("newTitle:", newTitle)
+    changeWidgetTitle(title, newTitle);
+  }
+
   return (
     <div className="widget">
       <div className="widget-header">
-        <div className="widget-title">{title}</div>
+        {/* <div className="widget-title">{title}</div> */}
+
+        {/* <span class="input" role="textbox" contenteditable>{title}</span> */}
+
+        <input className="widget-title2" type="text" value={title}
+              onChange={changeTitle}
+        />
+        
         <div className="widget-control">
           <button
             class="btn btn-dark btn-sm action-button"

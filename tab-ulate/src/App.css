@@ -21,7 +21,7 @@
   border-radius: 4px;
   background-color: white;
 
-  flex-grow: 1;
+  /* flex-grow: 1; */
   flex-shrink: 2;
 
   margin: 1rem;
@@ -45,6 +45,16 @@
   font-size: 175%;
   font-family: "Open Sans", monospace;
   font-weight: normal;
+}
+
+.widget-title2 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 175%;
+  font-family: "Open Sans", monospace;
+  font-weight: normal;
+  border: 0;
+  width: min-content;
 }
 
 .widget-control {
@@ -78,9 +88,28 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+
+  /* justify-content: space-between; */
+  justify-content: flex-start;
+
+  /* align-items: stretch; */
+  align-items: flex-start;
+  /* align-content: space-around; */
+}
+
+.dashboard-grid2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: stretch;
-  align-content: space-around;
+}
+
+.widget2 {
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  background-color: white;
+  flex-grow: 1;
+  margin: 1rem;
 }
 
 .widget-grid {
@@ -106,6 +135,7 @@
   height: 100%;
   text-align: center;
   align-items: center;
+  font-size: small;
 }
 .action-button {
   display: flex;
@@ -117,6 +147,7 @@
   padding-left: 10px;
   padding-right: 10px;
   margin-top: 5px;
+  font-size: small;
 }
 
 .widget-control .action-button {
@@ -129,7 +160,7 @@
   border-radius: 4px;
 }
 
-.widget-control .action-button:hover {
+.widget-control .action-button:hover, .delete-button:hover {
   background: lightgray;
   border-color: black;
   color: black;
@@ -140,6 +171,7 @@
   padding: 2px;
   margin: 5px;
   display: flex;
+  text-align: center;
 }
 
 .widget-link a {
