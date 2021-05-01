@@ -9,6 +9,7 @@ import {
   deleteWidget as deleteWidgetFirebase,
   getWidgets as getWidgetsFirebase,
   addLinkToWidget as addLinkFirebase,
+  changeWidgetTitle as changeWidgetTitleFirebase, 
   deleteLink as deleteLinkFirebase,
   db,
 } from "../scripts/login.js";
@@ -26,7 +27,7 @@ function MyVerticallyCenteredModal(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(website, url, props.currWidget);
+    // console.log(website, url, props.currWidget);
     onHide();
     props.addLinkToWidget(website, url, props.currWidget);
   };
@@ -100,14 +101,11 @@ const Dashboard = () => {
     const response = db.collection("users").doc(user.displayName);
     const data = await response.get();
     const w = await data.data().widgets;
-    console.log("w", w);
     setWidgets(w);
   };
 
   useEffect(() => {
-    console.log("outside if", user);
     if (user) {
-      console.log("inside", user);
       fetchWidgets(user);
     }
   }, [user]);
@@ -116,6 +114,9 @@ const Dashboard = () => {
     const toEdit = widgets.find((obj) => {
       return obj.title === widgetName;
     });
+    if (!url.startsWith("https://")) {
+      url = "https://" + url
+    }
     toEdit.links.push({ url: url, name: website });
     const newState = widgets.map((obj) => obj);
     setWidgets(newState);
@@ -151,13 +152,22 @@ const Dashboard = () => {
   };
 
   const deleteWidget = (widgetName) => {
-    console.log("delete");
     const newState = widgets.filter((obj) => {
       return obj.title !== widgetName;
     });
     setWidgets(newState);
     deleteWidgetFirebase(widgetName);
   };
+
+  const changeWidgetTitle = (widgetName, newWidgetTitle) => {
+    const widget = widgets.find((obj) => {
+      return obj.title === widgetName;
+    });
+    widget.title = newWidgetTitle;
+    const newState = widgets.map((obj) => obj);
+    setWidgets(newState);
+    changeWidgetTitleFirebase(widgetName, newWidgetTitle);
+  }
 
   return (
     <>
@@ -171,6 +181,7 @@ const Dashboard = () => {
                 openModal={openModal}
                 removeLink={removeLinkFromWidget}
                 deleteWidget={deleteWidget}
+                changeWidgetTitle={changeWidgetTitle}
                 isActive={ currWidget === widget.title }
                 onClick = { () => {
                   if (widget.title === currWidget) {
@@ -181,7 +192,10 @@ const Dashboard = () => {
                   }}
               />
             ))}
-            <div className="widget">
+            
+          </div>
+          <div className="dashboard-grid2">
+            <div className="widget2">
               <div className="widget-header">
                 <div className="widget-title">Recents</div>
               </div>
@@ -211,7 +225,7 @@ const Dashboard = () => {
                 ))}
               </div>
             </div>
-            <div className="widget">
+            <div className="widget2">
               <div className="widget-header">
                 <div className="widget-title">Calendar</div>
               </div>
@@ -251,9 +265,7 @@ const Dashboard = () => {
             addWidgetToDashboard={addWidgetToDashboard}
           />
         </>
-      ) : (
-        <h1>Please Sign in</h1>
-      )}
+      ) : <></>}
     </>
   );
 };

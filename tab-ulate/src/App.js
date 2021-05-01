@@ -37,19 +37,7 @@ function App() {
   //     url: "https://cs61a.org",
   //   });
   // }
-  const [widgets, getWidgets] = useState([])
 
-  async function load() {
-    console.log("start loading");
-    signIn().then(() => {
-      getWidgets(getWidgetsFirebase());
-      console.log("loaded");
-      console.log(widgets);
-    }).catch(function (error) {
-      console.error("Error loading widgets", error);
-    });
-    
-  }
 
   return (
     <UserProvider>

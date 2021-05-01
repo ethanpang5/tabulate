@@ -96,7 +96,6 @@ export function isUserSignedIn() {
 export function addWidget(widgetTitle) {
   // Add a new message entry to the database.
   let user = firebase.firestore().collection("users").doc(getUserName());
-  console.log("78", user);
 
   if (user) {
     user
@@ -106,9 +105,7 @@ export function addWidget(widgetTitle) {
         return tempWidgets;
       })
       .then((tempWidgets) => {
-        console.log("70", tempWidgets);
         tempWidgets.push({ title: widgetTitle, links: [] });
-        console.log("73", tempWidgets);
 
         return user
           .update(
@@ -126,30 +123,16 @@ export function addWidget(widgetTitle) {
   }
 }
 
-// const getWidgetsPromise = new Promise((user) => {
-//   user.get().then((doc) => {
-//     if (doc.exists) {
-//       console.log("doc exists");
-//       console.log(doc.data().widgets);
-//       return doc.data().widgets;
-//     } else {
-//       console.log("doc doesn't exit");
-//     }
-//   });
-// });
 
 export function getWidgets() {
   // returns the current user's widgets
 
   return new Promise(() => {
     let user = firebase.firestore().collection("users").doc(getUserName());
-    console.log("firebase:", user);
     user.get().then((doc) => {
       if (doc.exists) {
-        console.log("doc exists", doc.data().widgets);
         return doc.data().widgets;
       } else {
-        console.log("doc doesn't exit");
       }
     });
   });
@@ -160,28 +143,19 @@ export function addLinkToWidget(widgetName, website, url) {
   let user = firebase.firestore().collection("users").doc(getUserName());
 
   let tempWidgets = ["check this"];
-  console.log("92");
 
   user
     .get()
     .then((doc) => {
-      console.log("96", doc.data());
       tempWidgets = doc.data().widgets;
-      console.log("98", tempWidgets);
-
       const toEdit = tempWidgets.find((obj) => {
         return obj.title === widgetName;
       });
-      console.log("103", toEdit);
 
       toEdit.links.push({ url: url, name: website });
       tempWidgets.map((obj) => obj);
-      console.log("108", toEdit);
-      console.log("109", tempWidgets);
     })
     .then(() => {
-      console.log("111", tempWidgets);
-
       return user
         .update(
           {
@@ -208,11 +182,8 @@ export function deleteLink(widgetName, url) {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        console.log("doc exists");
-        console.log(doc.data().widgets);
         return doc.data().widgets;
       } else {
-        console.log("doc doesn't exit");
       }
     })
     .then((widgets) => {
@@ -245,15 +216,11 @@ export function deleteWidget(widgetName) {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        console.log("doc exists");
-        console.log(doc.data().widgets);
         return doc.data().widgets;
       } else {
-        console.log("doc doesn't exit");
       }
     })
     .then((widgets) => {
-      console.log("216 " + widgets);
       const newState = widgets.filter((obj) => {
         return obj.title !== widgetName;
       });
@@ -271,26 +238,36 @@ export function deleteWidget(widgetName) {
           console.error("Error writing new message to database", error);
         });
     });
+}
 
-  // getWidgetsPromise.then(user)
-  //   console.log("216 " + widgets);
-  //   const newState = widgets.filter((obj) => {
-  //     return obj.title !== widgetName;
-  //   });
-
-  //   user
-  //     .update(
-  //       {
-  //         name: getUserName(),
-  //         widgets: newState,
-  //         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-  //       },
-  //       { merge: true }
-  //     )
-  //     .catch(function (error) {
-  //       console.error("Error writing new message to database", error);
-  //     });
-  // get the widget with title=widgetName
+export function changeWidgetTitle(widgetName, newWidgetTitle) {
+  let user = firebase.firestore().collection("users").doc(getUserName());
+  user
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        return doc.data().widgets;
+      }
+    })
+    .then((widgets) => {
+      const widget = widgets.find((obj) => {
+        return obj.title === widgetName;
+      });
+      widget.title = newWidgetTitle;
+      console.log("title:", widget.title)
+      user
+        .update(
+          {
+            name: getUserName(),
+            widgets: widgets,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        )
+        .catch(function (error) {
+          console.error("Error writing new message to database", error);
+        });
+    });
 }
 
 // Loads chat messages history and listens for upcoming ones.
@@ -331,6 +308,3 @@ checkSetup();
 
 // We load currently existing chat messages and listen to new ones.
 
-export function bruh() {
-  console.log("have a wonderful day!");
-}

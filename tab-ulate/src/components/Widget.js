@@ -3,7 +3,7 @@ import React from 'react';
 
 import WidgetLink from "./WidgetLink";
 
-const Widget = ({ title, links, openModal, removeLink, deleteWidget, isActive, onClick }) => {
+const Widget = ({ title, links, openModal, removeLink, deleteWidget, isActive, onClick, changeWidgetTitle }) => {
   const removeLinkFromThisWidget = (url) => {
     removeLink(title, url);
   };
@@ -12,11 +12,26 @@ const Widget = ({ title, links, openModal, removeLink, deleteWidget, isActive, o
         // window.open(links[i].url, "_blank")
         await chrome.tabs.create({ url: links[i].url })
     }
+  };
+
+  const changeTitle = (event) => {
+    const newTitle = event.target.value;
+    // setWidgetTitle(newTitle);
+    console.log("newTitle:", newTitle)
+    changeWidgetTitle(title, newTitle);
   }
+
   return (
     <div className="widget" id={isActive ? "active-widget" : "not-active"} onClick={onClick}>
       <div className="widget-header">
-        <div className="widget-title">{title}</div>
+        {/* <div className="widget-title">{title}</div> */}
+
+        {/* <span class="input" role="textbox" contenteditable>{title}</span> */}
+
+        <input className="widget-title2" type="text" value={title}
+              onChange={changeTitle}
+        />
+        
         <div className="widget-control">
           <button
             class="btn btn-dark btn-sm action-button"
