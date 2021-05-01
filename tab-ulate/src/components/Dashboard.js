@@ -66,13 +66,10 @@ function MyVerticallyCenteredModal(props) {
             />
           </Form.Group>
           <Button variant="primary" type="submit">
-            Submit
+            Save
           </Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
-      </Modal.Footer>
     </Modal>
   );
 }
@@ -89,8 +86,9 @@ const Dashboard = () => {
         chrome.history.search({text: '', maxResults: 20}, function(data) {
                 const updated = []
                 data.forEach(function(page) {
-                    updated.push({ title: page.title, url: page.url })
-                    console.log(updated)
+                    if (page.title) {
+                      updated.push({ title: page.title, url: page.url })
+                    }
                 });
                 setRecents(updated);
               });
@@ -175,8 +173,11 @@ const Dashboard = () => {
                 deleteWidget={deleteWidget}
                 isActive={ currWidget === widget.title }
                 onClick = { () => {
-                  console.log(widget.title)
-                  setCurrWidget(widget.title) 
+                  if (widget.title === currWidget) {
+                    setCurrWidget("")
+                  } else {
+                    setCurrWidget(widget.title) 
+                  }
                   }}
               />
             ))}
