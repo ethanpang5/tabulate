@@ -1,18 +1,16 @@
-import React from "react";
+/*global chrome*/
+import React from 'react';
 
 import WidgetLink from "./WidgetLink";
 
-const Widget = ({ title, links, openModal, removeLink, deleteWidget, changeWidgetTitle }) => {
-  const [widgetTitle, setWidgetTitle] = React.useState(title)
-
-
+const Widget = ({ title, links, openModal, removeLink, deleteWidget, isActive, onClick, changeWidgetTitle }) => {
   const removeLinkFromThisWidget = (url) => {
     removeLink(title, url);
   };
-  const openAllLinks = () => {
-    console.log("here");
-    for (let i = 0; i < links.length; i++) {
-      window.open(links[i].url, "_blank");
+  const openAllLinks = async () => {
+    for (let i=0; i < links.length; i++) {
+        // window.open(links[i].url, "_blank")
+        await chrome.tabs.create({ url: links[i].url })
     }
   };
 
@@ -24,7 +22,7 @@ const Widget = ({ title, links, openModal, removeLink, deleteWidget, changeWidge
   }
 
   return (
-    <div className="widget">
+    <div className="widget" id={isActive ? "active-widget" : "not-active"} onClick={onClick}>
       <div className="widget-header">
         {/* <div className="widget-title">{title}</div> */}
 

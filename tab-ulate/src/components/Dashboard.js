@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+/*global chrome*/
+import React, { useState, useEffect, useContext } from 'react'
+import { Modal, Button, Form } from 'react-bootstrap';
 
 import Widget from "./Widget";
 import AddWidgetModal from "./AddWidgetModal";
@@ -41,11 +42,10 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          Add to {props.currWidget} 
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Add Website</h4>
         <Form onSubmit={onSubmit}>
           <Form.Group controlId="websiteName">
             <Form.Label>Website name</Form.Label>
@@ -67,24 +67,23 @@ function MyVerticallyCenteredModal(props) {
             />
           </Form.Group>
           <Button variant="primary" type="submit">
-            Submit
+            Save
           </Button>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
-      </Modal.Footer>
     </Modal>
   );
 }
 
 const Dashboard = () => {
-  const user = useContext(UserContext);
-  const [modalShow, setModalShow] = React.useState(false);
-  const [currWidget, setCurrWidget] = React.useState("");
-  const [showWidgetModal, setShowWidgetModal] = useState(false);
-  const [widgets, setWidgets] = useState([]);
+    const user = useContext(UserContext);
+    const [modalShow, setModalShow] = React.useState(false);
+    const [currWidget, setCurrWidget] = React.useState('');
+    const [showWidgetModal, setShowWidgetModal] = useState(false);
+    const [widgets, setWidgets] = React.useState([])
+    const [recents, setRecents] = useState([])
 
+<<<<<<< HEAD
   useEffect(() => {
     if (user) {
       fetchWidgets(user);
@@ -131,8 +130,21 @@ const Dashboard = () => {
       url: "https://www.google.com",
     },
   ]);
+=======
+    useEffect (() => {
+        chrome.history.search({text: '', maxResults: 20}, function(data) {
+                const updated = []
+                data.forEach(function(page) {
+                    if (page.title) {
+                      updated.push({ title: page.title, url: page.url })
+                    }
+                });
+                setRecents(updated);
+              });
+    }, [])
+>>>>>>> with_chrome
 
-  const userEmail = user?.email?.replace("@", "%40"); //"charlesming2002%40gmail.com"
+    const userEmail = user?.email?.replace('@', '%40') //"charlesming2002%40gmail.com"
 
   const fetchWidgets = async (user) => {
     const response = db.collection("users").doc(user.displayName);
@@ -219,6 +231,14 @@ const Dashboard = () => {
                 removeLink={removeLinkFromWidget}
                 deleteWidget={deleteWidget}
                 changeWidgetTitle={changeWidgetTitle}
+                isActive={ currWidget === widget.title }
+                onClick = { () => {
+                  if (widget.title === currWidget) {
+                    setCurrWidget("")
+                  } else {
+                    setCurrWidget(widget.title) 
+                  }
+                  }}
               />
             ))}
             
@@ -238,6 +258,18 @@ const Dashboard = () => {
                     >
                       {recent.title}
                     </a>
+                    { currWidget ? 
+                      <button
+                        class="btn btn-success btn-xs"
+                        onClick={() => {
+                          if (currWidget) {
+                            addLinkToWidget(recent.title, recent.url, currWidget)
+                          }
+                          }}
+                      >
+                        +
+                      </button>
+                    : null}
                   </div>
                 ))}
               </div>
