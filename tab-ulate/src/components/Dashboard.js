@@ -81,7 +81,7 @@ const Dashboard = () => {
   const [currWidget, setCurrWidget] = React.useState("");
   const [showWidgetModal, setShowWidgetModal] = useState(false);
   const [widgets, setWidgets] = React.useState([]);
-  const [recents, setRecents] = useState([]) UNCOMMENT THIS LINE FOR CHROME EXTENSION
+  const [recents, setRecents] = useState([]);
 
   // const [widgets, setWidgets] = React.useState([
   //   {
@@ -126,17 +126,17 @@ const Dashboard = () => {
   // ]);
 
   //UNCOMMENT FOR CHROME EXTENSION
-  useEffect (() => {
-      chrome.history.search({text: '', maxResults: 20}, function(data) {
-              const updated = []
-              data.forEach(function(page) {
-                  if (page.title) {
-                    updated.push({ title: page.title, url: page.url })
-                  }
-              });
-              setRecents(updated);
-            });
-  }, [])
+  useEffect(() => {
+    chrome.history.search({ text: "", maxResults: 20 }, function (data) {
+      const updated = [];
+      data.forEach(function (page) {
+        if (page.title) {
+          updated.push({ title: page.title, url: page.url });
+        }
+      });
+      setRecents(updated);
+    });
+  }, []);
 
   const userEmail = user?.email?.replace("@", "%40"); //"charlesming2002%40gmail.com"
 
@@ -241,15 +241,21 @@ const Dashboard = () => {
                   <button
                     class="btn btn-secondary btn-sm action-button"
                     onClick={() => {
-                        chrome.history.search({text: '', maxResults: 20}, function(data) {
-                        const updated = []
-                        data.forEach(function(page) {
+                      chrome.history.search(
+                        { text: "", maxResults: 20 },
+                        function (data) {
+                          const updated = [];
+                          data.forEach(function (page) {
                             if (page.title) {
-                              updated.push({ title: page.title, url: page.url })
+                              updated.push({
+                                title: page.title,
+                                url: page.url,
+                              });
                             }
-                        });
-                        setRecents(updated);
-                      });
+                          });
+                          setRecents(updated);
+                        }
+                      );
                     }}
                   >
                     refresh
