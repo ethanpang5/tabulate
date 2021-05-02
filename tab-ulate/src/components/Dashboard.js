@@ -81,7 +81,7 @@ const Dashboard = () => {
   const [currWidget, setCurrWidget] = React.useState("");
   const [showWidgetModal, setShowWidgetModal] = useState(false);
   const [widgets, setWidgets] = React.useState([]);
-  // const [recents, setRecents] = useState([]) UNCOMMENT THIS LINE FOR CHROME EXTENSION
+  const [recents, setRecents] = useState([]) UNCOMMENT THIS LINE FOR CHROME EXTENSION
 
   // const [widgets, setWidgets] = React.useState([
   //   {
@@ -109,34 +109,34 @@ const Dashboard = () => {
   //     ],
   //   },
   // ]);
-  const [recents, setRecents] = useState([
-    {
-      title: "Youtube",
-      url: "https://www.youtube.com",
-    },
-    {
-      title:
-        "Netflix test test test test test test test test test test test test test test test test test test test test test test test test test test",
-      url: "https://www.netflix.com",
-    },
-    {
-      title: "Google",
-      url: "https://www.google.com",
-    },
-  ]);
+  // const [recents, setRecents] = useState([
+  //   {
+  //     title: "Youtube",
+  //     url: "https://www.youtube.com",
+  //   },
+  //   {
+  //     title:
+  //       "Netflix test test test test test test test test test test test test test test test test test test test test test test test test test test",
+  //     url: "https://www.netflix.com",
+  //   },
+  //   {
+  //     title: "Google",
+  //     url: "https://www.google.com",
+  //   },
+  // ]);
 
-  // UNCOMMENT FOR CHROME EXTENSION
-  // useEffect (() => {
-  //     chrome.history.search({text: '', maxResults: 20}, function(data) {
-  //             const updated = []
-  //             data.forEach(function(page) {
-  //                 if (page.title) {
-  //                   updated.push({ title: page.title, url: page.url })
-  //                 }
-  //             });
-  //             setRecents(updated);
-  //           });
-  // }, [])
+  //UNCOMMENT FOR CHROME EXTENSION
+  useEffect (() => {
+      chrome.history.search({text: '', maxResults: 20}, function(data) {
+              const updated = []
+              data.forEach(function(page) {
+                  if (page.title) {
+                    updated.push({ title: page.title, url: page.url })
+                  }
+              });
+              setRecents(updated);
+            });
+  }, [])
 
   const userEmail = user?.email?.replace("@", "%40"); //"charlesming2002%40gmail.com"
 
