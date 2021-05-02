@@ -21,8 +21,8 @@
   border-radius: 4px;
   background-color: white;
 
-  /* flex-grow: 1; */
-  flex-shrink: 2;
+  flex-grow: 1;
+  flex-shrink: 1;
 
   margin: 1rem;
   /* padding: 7px; */
@@ -165,7 +165,8 @@
   border-radius: 4px;
 }
 
-.widget-control .action-button:hover, .delete-button:hover {
+.widget-control .action-button:hover,
+.delete-button:hover {
   background: lightgray;
   border-color: black;
   color: black;
@@ -200,9 +201,10 @@
   float: right;
 }
 
-.btn-group-xs > .btn, .btn-xs {
-  padding: .25rem .4rem;
-  font-size: .875rem;
-  line-height: .5;
-  border-radius: .2rem;
+.btn-group-xs > .btn,
+.btn-xs {
+  padding: 0.25rem 0.4rem;
+  font-size: 0.875rem;
+  line-height: 0.5;
+  border-radius: 0.2rem;
 }
