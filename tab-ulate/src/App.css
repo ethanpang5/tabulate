@@ -80,7 +80,8 @@
 }
 
 #active-widget {
-  background: lightgray;
+  /* background: lightgray; */
+  border: 1px solid #28a745;
 }
 
 .dashboard-grid {
