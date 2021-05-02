@@ -1,6 +1,6 @@
 /*global chrome*/
-import React, { useState, useEffect, useContext } from 'react'
-import { Modal, Button, Form } from 'react-bootstrap';
+import React, { useState, useEffect, useContext } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
 
 import Widget from "./Widget";
 import AddWidgetModal from "./AddWidgetModal";
@@ -9,7 +9,7 @@ import {
   deleteWidget as deleteWidgetFirebase,
   getWidgets as getWidgetsFirebase,
   addLinkToWidget as addLinkFirebase,
-  changeWidgetTitle as changeWidgetTitleFirebase, 
+  changeWidgetTitle as changeWidgetTitleFirebase,
   deleteLink as deleteLinkFirebase,
   db,
 } from "../scripts/login.js";
@@ -42,7 +42,7 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Add to {props.currWidget} 
+          Add to {props.currWidget}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -76,14 +76,14 @@ function MyVerticallyCenteredModal(props) {
 }
 
 const Dashboard = () => {
-    const user = useContext(UserContext);
-    const [modalShow, setModalShow] = React.useState(false);
-    const [currWidget, setCurrWidget] = React.useState('');
-    const [showWidgetModal, setShowWidgetModal] = useState(false);
-    const [widgets, setWidgets] = React.useState([])
-    // const [recents, setRecents] = useState([]) UNCOMMENT THIS LINE FOR CHROME EXTENSION
+  const user = useContext(UserContext);
+  const [modalShow, setModalShow] = React.useState(false);
+  const [currWidget, setCurrWidget] = React.useState("");
+  const [showWidgetModal, setShowWidgetModal] = useState(false);
+  const [widgets, setWidgets] = React.useState([]);
+  // const [recents, setRecents] = useState([]) UNCOMMENT THIS LINE FOR CHROME EXTENSION
 
-    // const [widgets, setWidgets] = React.useState([
+  // const [widgets, setWidgets] = React.useState([
   //   {
   //     title: "Classes",
   //     links: [
@@ -115,7 +115,8 @@ const Dashboard = () => {
       url: "https://www.youtube.com",
     },
     {
-      title: "Netflix test test test test test test test test test test test test test test test test test test test test test test test test test test",
+      title:
+        "Netflix test test test test test test test test test test test test test test test test test test test test test test test test test test",
       url: "https://www.netflix.com",
     },
     {
@@ -125,19 +126,19 @@ const Dashboard = () => {
   ]);
 
   // UNCOMMENT FOR CHROME EXTENSION
-    // useEffect (() => {
-    //     chrome.history.search({text: '', maxResults: 20}, function(data) {
-    //             const updated = []
-    //             data.forEach(function(page) {
-    //                 if (page.title) {
-    //                   updated.push({ title: page.title, url: page.url })
-    //                 }
-    //             });
-    //             setRecents(updated);
-    //           });
-    // }, [])
+  // useEffect (() => {
+  //     chrome.history.search({text: '', maxResults: 20}, function(data) {
+  //             const updated = []
+  //             data.forEach(function(page) {
+  //                 if (page.title) {
+  //                   updated.push({ title: page.title, url: page.url })
+  //                 }
+  //             });
+  //             setRecents(updated);
+  //           });
+  // }, [])
 
-    const userEmail = user?.email?.replace('@', '%40') //"charlesming2002%40gmail.com"
+  const userEmail = user?.email?.replace("@", "%40"); //"charlesming2002%40gmail.com"
 
   const fetchWidgets = async (user) => {
     const response = db.collection("users").doc(user.displayName);
@@ -156,8 +157,9 @@ const Dashboard = () => {
     const toEdit = widgets.find((obj) => {
       return obj.title === widgetName;
     });
+    console.log("159", widgets, toEdit);
     if (!url.startsWith("https://")) {
-      url = "https://" + url
+      url = "https://" + url;
     }
     toEdit.links.push({ url: url, name: website });
     const newState = widgets.map((obj) => obj);
@@ -209,7 +211,7 @@ const Dashboard = () => {
     const newState = widgets.map((obj) => obj);
     setWidgets(newState);
     changeWidgetTitleFirebase(widgetName, newWidgetTitle);
-  }
+  };
 
   return (
     <>
@@ -224,17 +226,12 @@ const Dashboard = () => {
                 removeLink={removeLinkFromWidget}
                 deleteWidget={deleteWidget}
                 changeWidgetTitle={changeWidgetTitle}
-                isActive={ currWidget === widget.title }
-                onClick = { () => {
-                  if (widget.title === currWidget) {
-                    setCurrWidget("")
-                  } else {
-                    setCurrWidget(widget.title) 
-                  }
-                  }}
+                isActive={currWidget === widget.title}
+                onClick={() => {
+                  setCurrWidget(widget.title);
+                }}
               />
             ))}
-            
           </div>
           <div className="dashboard-grid2">
             <div className="widget2">
@@ -251,18 +248,22 @@ const Dashboard = () => {
                     >
                       {recent.title}
                     </a>
-                    { currWidget ? 
+                    {currWidget ? (
                       <button
                         class="btn btn-success btn-xs"
                         onClick={() => {
                           if (currWidget) {
-                            addLinkToWidget(recent.title, recent.url, currWidget)
+                            addLinkToWidget(
+                              recent.title,
+                              recent.url,
+                              currWidget
+                            );
                           }
-                          }}
+                        }}
                       >
                         +
                       </button>
-                    : null}
+                    ) : null}
                   </div>
                 ))}
               </div>
@@ -307,7 +308,9 @@ const Dashboard = () => {
             addWidgetToDashboard={addWidgetToDashboard}
           />
         </>
-      ) : <></>}
+      ) : (
+        <></>
+      )}
     </>
   );
 };
