@@ -123,7 +123,7 @@ const Dashboard = () => {
       url: "https://www.youtube.com",
     },
     {
-      title: "Netflix",
+      title: "Netflix test test test test test test test test test test test test test test test test test test test test test test test test test test",
       url: "https://www.netflix.com",
     },
     {
@@ -253,7 +253,7 @@ const Dashboard = () => {
                   "&ctz=America%2FLos_Angeles"
                 }
                 title="calendar"
-                width="100%"
+                width="600"
                 height="400"
                 frameborder="0"
                 scrolling="no"
