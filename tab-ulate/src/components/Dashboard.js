@@ -237,6 +237,24 @@ const Dashboard = () => {
             <div className="widget2">
               <div className="widget-header">
                 <div className="widget-title">Recents</div>
+                <div className="widget-control">
+                  <button
+                    class="btn btn-secondary btn-sm action-button"
+                    onClick={() => {
+                        chrome.history.search({text: '', maxResults: 20}, function(data) {
+                        const updated = []
+                        data.forEach(function(page) {
+                            if (page.title) {
+                              updated.push({ title: page.title, url: page.url })
+                            }
+                        });
+                        setRecents(updated);
+                      });
+                    }}
+                  >
+                    refresh
+                  </button>
+                </div>
               </div>
               <div className="widget-grid" id="recents">
                 {recents.map((recent) => (
