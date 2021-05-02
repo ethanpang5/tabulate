@@ -81,16 +81,9 @@ const Dashboard = () => {
     const [currWidget, setCurrWidget] = React.useState('');
     const [showWidgetModal, setShowWidgetModal] = useState(false);
     const [widgets, setWidgets] = React.useState([])
-    const [recents, setRecents] = useState([])
+    // const [recents, setRecents] = useState([]) UNCOMMENT THIS LINE FOR CHROME EXTENSION
 
-<<<<<<< HEAD
-  useEffect(() => {
-    if (user) {
-      fetchWidgets(user);
-    }
-  }, [user]);
-
-  // const [widgets, setWidgets] = React.useState([
+    // const [widgets, setWidgets] = React.useState([
   //   {
   //     title: "Classes",
   //     links: [
@@ -130,19 +123,19 @@ const Dashboard = () => {
       url: "https://www.google.com",
     },
   ]);
-=======
-    useEffect (() => {
-        chrome.history.search({text: '', maxResults: 20}, function(data) {
-                const updated = []
-                data.forEach(function(page) {
-                    if (page.title) {
-                      updated.push({ title: page.title, url: page.url })
-                    }
-                });
-                setRecents(updated);
-              });
-    }, [])
->>>>>>> with_chrome
+
+  // UNCOMMENT FOR CHROME EXTENSION
+    // useEffect (() => {
+    //     chrome.history.search({text: '', maxResults: 20}, function(data) {
+    //             const updated = []
+    //             data.forEach(function(page) {
+    //                 if (page.title) {
+    //                   updated.push({ title: page.title, url: page.url })
+    //                 }
+    //             });
+    //             setRecents(updated);
+    //           });
+    // }, [])
 
     const userEmail = user?.email?.replace('@', '%40') //"charlesming2002%40gmail.com"
 
