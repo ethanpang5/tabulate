@@ -130,7 +130,7 @@ const Dashboard = () => {
     chrome.history.search({ text: "", maxResults: 20 }, function (data) {
       const updated = [];
       data.forEach(function (page) {
-        if (page.title) {
+        if (page.title && !updated.includes(page.title)) {
           updated.push({ title: page.title, url: page.url });
         }
       });
