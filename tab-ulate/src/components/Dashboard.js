@@ -9,6 +9,7 @@ import {
   deleteWidget as deleteWidgetFirebase,
   getWidgets as getWidgetsFirebase,
   addLinkToWidget as addLinkFirebase,
+  editLink as editLinkFirebase,
   changeWidgetTitle as changeWidgetTitleFirebase,
   deleteLink as deleteLinkFirebase,
   db,
@@ -178,6 +179,21 @@ const Dashboard = () => {
     setWidgets(newState);
     deleteLinkFirebase(widgetName, url); //sync firebase
   };
+
+  const editLink = (widgetName, linkTitle, newTitle, newURL) => {
+    const widget = widgets.find((obj) => {
+      return obj.title === widgetName;
+    });
+    for (let i = 0; i < widget.links.length; i++) {
+      if (widget.links[i].name === linkTitle) {
+        widget.links[i].name = newTitle;
+        widget.links[i].url = newURL;
+      }
+    }
+    const newState = widgets.map((obj) => obj);
+    setWidgets(newState);
+    editLinkFirebase(widgetName, linkTitle, newTitle, newURL);
+  }
 
   const openModal = (widgetName) => {
     setModalShow(true);

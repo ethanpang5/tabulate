@@ -209,6 +209,37 @@ export function deleteLink(widgetName, url) {
     });
 }
 
+export function editLink(widgetName, linkTitle, newTitle, newURL) {
+  let user = firebase.firestore().collection("users").doc(getUserName());
+  user.get().then((doc) => {
+    if (doc.exists) {
+      return doc.data().widgets;
+    }
+  }).then((widgets) => {
+    let widget = widgets.find((obj) => {
+      return obj.title == widgetName;
+    });
+    for (let i = 0; i < widget.links.length; i++) {
+      if (widget.links[i].name === linkTitle) {
+        widget.links[i].name = newTitle;
+        widget.links[i].url = newURL;
+      }
+    }
+    user
+        .update(
+          {
+            name: getUserName(),
+            widgets: widgets,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          },
+          { merge: true }
+        )
+        .catch(function (error) {
+          console.error("Error writing new message to database", error);
+        });
+  });
+}
+
 export function deleteWidget(widgetName) {
   let user = firebase.firestore().collection("users").doc(getUserName());
 

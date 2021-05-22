@@ -15,30 +15,6 @@ import Dashboard from "./components/Dashboard";
 import UserProvider from "./providers/UserProvider";
 
 function App() {
-  console.log('new');
-  // const [recents, setRecents] = useState([]);
-  // useEffect(() => {
-  //   chrome.history.search({text: '', maxResults: 10}, function(data) {
-  //     data.forEach(function(page) {
-  //         console.log(page.url);
-  //         setRecents(old => [...old, page.url]);
-  //         console.log(recents);
-  //     });
-  //   });
-  // }, [])
-
-  // const handleClick = () => {
-  //   console.log('clicked')
-  //   //to create multiple, have this in for loop with array of urls
-  //   chrome.tabs.create({
-  //     url: "https://nba.com",
-  //   });
-  //   chrome.tabs.create({
-  //     url: "https://cs61a.org",
-  //   });
-  // }
-
-
   return (
     <UserProvider>
       <Router>
