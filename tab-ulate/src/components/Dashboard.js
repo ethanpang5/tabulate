@@ -127,17 +127,17 @@ const Dashboard = () => {
   // ]);
 
   //UNCOMMENT FOR CHROME EXTENSION
-  useEffect(() => {
-    chrome.history.search({ text: "", maxResults: 20 }, function (data) {
-      const updated = [];
-      data.forEach(function (page) {
-        if (page.title && !updated.includes(page.title)) {
-          updated.push({ title: page.title, url: page.url });
-        }
-      });
-      setRecents(updated);
-    });
-  }, []);
+  // useEffect(() => {
+  //   chrome.history.search({ text: "", maxResults: 20 }, function (data) {
+  //     const updated = [];
+  //     data.forEach(function (page) {
+  //       if (page.title && !updated.includes(page.title)) {
+  //         updated.push({ title: page.title, url: page.url });
+  //       }
+  //     });
+  //     setRecents(updated);
+  //   });
+  // }, []);
 
   const userEmail = user?.email?.replace("@", "%40"); //"charlesming2002%40gmail.com"
 
@@ -249,7 +249,7 @@ const Dashboard = () => {
               />
             ))}
           </div>
-          <div className="dashboard-grid2">
+          {/* <div className="dashboard-grid2">
             <div className="widget2">
               <div className="widget-header">
                 <div className="widget-title">Recents</div>
@@ -325,7 +325,7 @@ const Dashboard = () => {
                 scrolling="no"
               />
             </div>
-          </div>
+          </div> */}
           <div class="addWidgetContainer">
             <button
               class="addWidgetButton"
