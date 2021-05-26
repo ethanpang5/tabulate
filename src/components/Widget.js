@@ -7,7 +7,7 @@ const Widget = ({ title, links, openModal, removeLink, deleteWidget, isActive, o
   const removeLinkFromThisWidget = (url) => {
     removeLink(title, url);
   };
-  const openAllLinks = async () => {
+  const openAllLinks = () => {
     for (let i=0; i < links.length; i++) {
         window.open(links[i].url, "_blank")
         // await chrome.tabs.create({ url: links[i].url })
